@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Perplexity Terminal</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.1.0/css/xterm.css" />
+  </head>
+  <body>
+    <div id="connectOverlay" class="overlay">
+      <div class="panel">
+        <h2>Wohin verbinden?</h2>
+        <form id="connectForm">
+          <label>Ziel:
+            <select id="targetType" name="targetType">
+              <option value="mock" selected>Mock (lokal, Standard)</option>
+              <option value="perplexity">Perplexity (API)</option>
+              <option value="custom">Custom (URL)</option>
+            </select>
+          </label>
+
+          <div id="perplexityFields" class="fields hidden">
+            <label>Perplexity URL:
+              <input id="perplexityUrl" type="text" placeholder="https://api.perplexity.ai/v1/answers" />
+            </label>
+            <label>API Key:
+              <input id="perplexityKey" type="password" placeholder="Gib API Key nur lokal ein (wird nicht gespeichert)" />
+            </label>
+          </div>
+
+          <div id="customFields" class="fields hidden">
+            <label>Custom URL:
+              <input id="customUrl" type="text" placeholder="https://example.com/your-proxy" />
+            </label>
+          </div>
+
+          <hr />
+
+          <h3>Personalisierung (optional)</h3>
+          <label>Dein Name:
+            <input id="userName" type="text" placeholder="Dein Name (z. B. 'Sultan')" />
+          </label>
+          <label>Kontext / Notizen:
+            <input id="userContext" type="text" placeholder="Kleiner Kontext, z.B. 'Projekt XYZ, Linux-Server A'" />
+          </label>
+
+          <div class="actions">
+            <button type="submit">Verbinden</button>
+            <button type="button" id="cancelConnect">Abbrechen</button>
+          </div>
+          <p class="hint">Hinweis: Gib API‑Keys niemals öffentlich preis. In Produktion: serverseitige Secrets verwenden.</p>
+        </form>
+      </div>
+    </div>
+
+    <div id="main">
+      <div id="terminal"></div>
+
+      <div id="side">
+        <div class="chatPanel">
+          <div class="chatHeader">Chat-Antworten</div>
+          <div id="chatMessages" class="chatMessages"></div>
+        </div>
+
+        <div class="suggestPanel">
+          <div class="chatHeader">Vorschläge (nur Befehle)</div>
+          <div id="suggestions" class="chatMessages"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.1.0/lib/xterm.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
