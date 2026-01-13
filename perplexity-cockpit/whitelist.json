@@ -1,0 +1,15 @@
+{
+  "hosts": {
+    "localhost": {
+      "users": ["root","ubuntu"],
+      "commands": [
+        "uptime",
+        "systemctl status *",
+        "journalctl -n *",
+        "docker ps",
+        "ls -la",
+        "cat /etc/os-release"
+      ]
+    }
+  }
+}

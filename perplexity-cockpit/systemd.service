@@ -1,0 +1,14 @@
+[Unit]
+Description=Perplexity Cockpit Helper
+After=network.target
+
+[Service]
+Type=simple
+User=youruser
+WorkingDirectory=/opt/perplexity-cockpit
+ExecStart=/usr/bin/node /opt/perplexity-cockpit/server.js
+Restart=on-failure
+EnvironmentFile=/opt/perplexity-cockpit/.env
+
+[Install]
+WantedBy=multi-user.target

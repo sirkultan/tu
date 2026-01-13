@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Perplexity → Cockpit Runner",
+  "version": "0.1",
+  "description": "Send selected commands from Perplexity chat to a local helper which executes them via SSH on a Cockpit host.",
+  "permissions": ["scripting", "storage"],
+  "host_permissions": ["https://localhost:3000/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://*.perplexity.ai/*"],
+      "js": ["content_script.js"]
+    }
+  ],
+  "icons": { "48": "icon48.png" }
+}
