@@ -1,14 +1,76 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Perplexity Terminal (Mock)</title>
+    <title>Perplexity Terminal — Setup Wizard</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.1.0/css/xterm.css" />
   </head>
   <body>
-    <div id="terminal"></div>
+    <!-- Setup Wizard (zeigt sich vor dem Terminal) -->
+    <div id="setupOverlay" class="overlay">
+      <div class="panel">
+        <h2>Setup Wizard</h2>
+        <form id="setupForm">
+          <label>Server IP:
+            <input id="setupIp" type="text" placeholder="z. B. 192.168.178.32" required />
+          </label>
+          <label>Port:
+            <input id="setupPort" type="number" value="22" required />
+          </label>
+          <label>Username:
+            <input id="setupUser" type="text" placeholder="z. B. sirkultan" required />
+          </label>
+
+          <label>Authentifizierung:
+            <select id="authMethod">
+              <option value="key">SSH Key (empfohlen)</option>
+              <option value="password">Passwort</option>
+            </select>
+          </label>
+
+          <div id="passwordField" class="hidden">
+            <label>Passwort:
+              <input id="authPassword" type="password" placeholder="Passwort für SSH" />
+            </label>
+          </div>
+
+          <div id="keyActions">
+            <button type="button" id="generateKeyBtn">SSH Key erzeugen</button>
+            <button type="button" id="showPubKeyBtn">Public Key anzeigen</button>
+            <button type="button" id="downloadPubKeyBtn">Public Key herunterladen</button>
+          </div>
+
+          <div id="pubkeyDisplay" class="hidden">
+            <label>Public Key (kopiere in ~/.ssh/authorized_keys):</label>
+            <textarea id="pubkeyText" readonly rows="4" style="width:100%"></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Speichern & Testen</button>
+            <button type="button" id="cancelSetup">Abbrechen</button>
+          </div>
+          <p class="hint">Hinweis: In Produktion: API‑Keys und Passwörter sicher serverseitig speichern.</p>
+        </form>
+        <div id="setupResult" style="margin-top:10px;"></div>
+      </div>
+    </div>
+
+    <div id="main">
+      <div id="terminal"></div>
+      <div id="side">
+        <div class="chatPanel">
+          <div class="chatHeader">Chat-Antworten</div>
+          <div id="chatMessages" class="chatMessages"></div>
+        </div>
+        <div class="suggestPanel">
+          <div class="chatHeader">Vorschläge (nur Befehle)</div>
+          <div id="suggestions" class="chatMessages"></div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/xterm@5.1.0/lib/xterm.js"></script>
     <script src="app.js"></script>
   </body>

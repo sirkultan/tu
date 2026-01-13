@@ -1,7 +1,16 @@
-﻿html,body {
-  height: 100%;
-  margin: 0;
-  background: #1e1e1e;
-  font-family: monospace;
-}
-#terminal { height: 100vh; width: 100%; padding: 8px; box-sizing: border-box; }
+/* public/styles.css */
+html,body { height:100%; margin:0; background:#0b0f14; font-family: Inter, ui-monospace, "Roboto Mono", monospace; color:#e5e5e5; }
+#main { display:grid; grid-template-columns:1fr 360px; gap:8px; height:100vh; padding:8px; box-sizing:border-box; }
+#terminal { background:#000; border-radius:6px; padding:6px; overflow:hidden; }
+#side { display:flex; flex-direction:column; gap:8px; height:calc(100vh - 16px); }
+.chatPanel, .suggestPanel { background:#071021; border-radius:6px; padding:8px; display:flex; flex-direction:column; overflow:hidden; }
+.chatHeader { font-weight:600; margin-bottom:8px; }
+.chatMessages { flex:1; overflow:auto; padding-right:6px; }
+.chatMessage { margin-bottom:10px; padding:8px; border-radius:6px; background:#081423; color:#dfe7ff; font-size:13px; display:flex; justify-content:space-between; align-items:center; }
+.overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); display:flex; align-items:center; justify-content:center; z-index:1000; }
+.panel { background:#071021; padding:20px; border-radius:8px; width:520px; color:#ddd; }
+.panel input, .panel select, .panel textarea { width:100%; padding:8px; margin-top:6px; background:#07111a; border:1px solid #233; color:#eee; border-radius:4px; }
+.actions { margin-top:12px; display:flex; gap:8px; }
+button { padding:8px 12px; background:#3b82f6; color:white; border:none; border-radius:4px; cursor:pointer; }
+.hidden { display:none; }
+.hint { font-size:12px; color:#aaa; margin-top:10px; }
